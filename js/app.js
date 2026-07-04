@@ -360,19 +360,28 @@ function renderSectionRead(char, section) {
   const visibleFields = section.fields.filter(f => data[f.key]);
   if (!visibleFields.length) return "";
 
+  const shortFields = visibleFields.filter(f => f.type !== "textarea");
+  const longFields = visibleFields.filter(f => f.type === "textarea");
+
   return `
     <div class="sheet-section">
       <div class="divider"><span class="mark">◆</span></div>
       <h2>${section.title}</h2>
+      ${shortFields.length ? `
       <dl class="kv">
-        ${visibleFields.filter(f => f.type !== "textarea" || !f.big).map(f => `
+        ${shortFields.map(f => `
           <dt>${f.label}</dt>
           <dd>${f.type === "url"
               ? `<a href="${escapeHtml(data[f.key])}" target="_blank" rel="noopener">ver imagen</a>`
-              : (f.type === "textarea" ? nl2p(data[f.key]) : escapeHtml(data[f.key]))}</dd>
+              : escapeHtml(data[f.key])}</dd>
         `).join("")}
-      </dl>
-      ${visibleFields.filter(f => f.big).map(f => `<div>${nl2p(data[f.key])}</div>`).join("")}
+      </dl>` : ""}
+      ${longFields.map(f => `
+        <div class="text-block">
+          <div class="text-block-label">${f.label}</div>
+          ${nl2p(data[f.key])}
+        </div>
+      `).join("")}
     </div>
   `;
 }
