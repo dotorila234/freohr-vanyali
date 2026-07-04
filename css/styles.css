@@ -58,6 +58,8 @@ button, input, textarea, select { font-family: var(--font-body); font-size: 1rem
   padding: 1rem 1.6rem;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: .7rem;
 }
 
 .topbar .brand {
@@ -72,9 +74,21 @@ button, input, textarea, select { font-family: var(--font-body); font-size: 1rem
 .topbar .who {
   display: flex;
   align-items: center;
-  gap: .9rem;
-  font-size: .92rem;
+  gap: .6rem;
+  font-size: .88rem;
   color: var(--ink-dim);
+  flex-wrap: wrap;
+}
+
+.topbar .who button, .topbar .who .btn {
+  padding: .4em .8em;
+  font-size: .85rem;
+}
+
+@media (max-width: 480px) {
+  .topbar { padding: .8rem 1rem; }
+  .topbar .brand { font-size: 1.05rem; }
+  .topbar .who { width: 100%; justify-content: flex-start; }
 }
 
 .badge-gm {
@@ -245,6 +259,11 @@ button.danger:hover { background: var(--danger); color: var(--ink); }
 dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; margin: 0; }
 dl.kv dt { font-size: .84rem; color: var(--ink-dim); }
 dl.kv dd { margin: 0; }
+
+.text-block { margin-top: 1rem; }
+.text-block-label { font-size: .84rem; color: var(--ink-dim); margin-bottom: .3rem; }
+.text-block p { margin: 0 0 .8em; }
+.text-block p:last-child { margin-bottom: 0; }
 
 .relation-item { border-left: 2px solid var(--gold); padding-left: .8em; margin-bottom: .6em; }
 .relation-item .rel-name { color: var(--gold); }
